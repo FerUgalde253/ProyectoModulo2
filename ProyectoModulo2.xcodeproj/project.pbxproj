@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8417B3B82A848BC400B9A843 /* SingInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417B3B72A848BC400B9A843 /* SingInModel.swift */; };
+		8417B3BB2A848D0C00B9A843 /* SingInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417B3BA2A848D0C00B9A843 /* SingInViewModel.swift */; };
 		8473204A2A74B915006C2B2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847320492A74B915006C2B2E /* AppDelegate.swift */; };
 		8473204C2A74B915006C2B2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473204B2A74B915006C2B2E /* SceneDelegate.swift */; };
 		847320512A74B915006C2B2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8473204F2A74B915006C2B2E /* Main.storyboard */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8417B3B72A848BC400B9A843 /* SingInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInModel.swift; sourceTree = "<group>"; };
+		8417B3BA2A848D0C00B9A843 /* SingInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInViewModel.swift; sourceTree = "<group>"; };
 		847320462A74B915006C2B2E /* ProyectoModulo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoModulo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847320492A74B915006C2B2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8473204B2A74B915006C2B2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8417B3B42A848B4600B9A843 /* SingIn */ = {
+			isa = PBXGroup;
+			children = (
+				8417B3B52A848B6400B9A843 /* Model */,
+				8417B3B62A848B6D00B9A843 /* View */,
+				8417B3B92A848CD200B9A843 /* ViewModel */,
+			);
+			path = SingIn;
+			sourceTree = "<group>";
+		};
+		8417B3B52A848B6400B9A843 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8417B3B72A848BC400B9A843 /* SingInModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8417B3B62A848B6D00B9A843 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				847320602A74B9E2006C2B2E /* SingInViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8417B3B92A848CD200B9A843 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8417B3BA2A848D0C00B9A843 /* SingInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8473203D2A74B915006C2B2E = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +138,8 @@
 		8473205D2A74B94D006C2B2E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8417B3B42A848B4600B9A843 /* SingIn */,
 				8473205E2A74B9A9006C2B2E /* HomeViewController.swift */,
-				847320602A74B9E2006C2B2E /* SingInViewController.swift */,
 				847320622A74BA13006C2B2E /* SingUpViewController.swift */,
 				847320642A74BA38006C2B2E /* GridViewController.swift */,
 				8473206C2A74BB38006C2B2E /* WinesViewController.swift */,
@@ -213,12 +251,14 @@
 				847320732A74BC15006C2B2E /* WinesTableViewCell.swift in Sources */,
 				847320782A74BCF4006C2B2E /* UIColor++.swift in Sources */,
 				847320612A74B9E2006C2B2E /* SingInViewController.swift in Sources */,
+				8417B3BB2A848D0C00B9A843 /* SingInViewModel.swift in Sources */,
 				8473206F2A74BB6C006C2B2E /* WineObj.swift in Sources */,
 				8473207C2A74BD34006C2B2E /* WineData.swift in Sources */,
 				8473204A2A74B915006C2B2E /* AppDelegate.swift in Sources */,
 				8473206A2A74BAE2006C2B2E /* WineCollectionViewCell.swift in Sources */,
 				8473207A2A74BD19006C2B2E /* Constatnts.swift in Sources */,
 				847320652A74BA38006C2B2E /* GridViewController.swift in Sources */,
+				8417B3B82A848BC400B9A843 /* SingInModel.swift in Sources */,
 				8473204C2A74B915006C2B2E /* SceneDelegate.swift in Sources */,
 				847320632A74BA13006C2B2E /* SingUpViewController.swift in Sources */,
 				8473205F2A74B9A9006C2B2E /* HomeViewController.swift in Sources */,

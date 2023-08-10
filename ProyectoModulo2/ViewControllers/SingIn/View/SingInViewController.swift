@@ -8,6 +8,8 @@
 import UIKit
 
 class SingInViewController: UIViewController {
+    
+    private var singInViewModel = SingInViewModel()
 
     var titleLabel : UILabel?
     var emailTextField : UITextField?
@@ -16,6 +18,7 @@ class SingInViewController: UIViewController {
     var singInContainer : UIView?
     var singUpRedirection : UIButton?
     var backButton : UIButton?
+    var errorLabel: UILabel?
     
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
@@ -25,9 +28,11 @@ class SingInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.ligtColor1
         screenElements()
-     
+        buttonSignIn?.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        emailTextField?.addTarget(self, action: #selector(emailTextFileEditingChanged), for: .editingChanged)
+        passwordTextField?.addTarget(self, action: #selector(passwordTextFileEditingChanged), for: .editingChanged)
+        view.backgroundColor = UIColor.ligtColor1
     }
     
     func screenElements(){
@@ -77,7 +82,7 @@ class SingInViewController: UIViewController {
         buttonSignIn?.titleLabel?.font = UIFont(name: "Georgia Bold", size: 20)
         buttonSignIn?.setTitle("Sing In", for: .normal)
         buttonSignIn?.setTitleColor(UIColor.ligtColor1, for: .normal)
-        buttonSignIn?.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
+        //buttonSignIn?.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
         view.addSubview(buttonSignIn!)
         ////////////////////////////////////////////
         singUpRedirection = UIButton()
@@ -109,7 +114,54 @@ class SingInViewController: UIViewController {
         backButton?.tintColor = UIColor.myBackGroundColor
         backButton?.addTarget(self, action: #selector(goToHome), for: .touchUpInside)
         view.addSubview(backButton!)
+        ////////////////////////////////
+        errorLabel = UILabel()
+        errorLabel?.textColor = UIColor.myBackGroundColor
+        //errorLabel?.text = "HOLA"
+        errorLabel?.font = UIFont(name: "Didot", size: 35)
+        errorLabel?.textAlignment = .center
+        errorLabel?.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(errorLabel!)
         
+        errorLabel?.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -leftPadding).isActive = true
+        errorLabel?.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        //errorLabel?.centerXAnchor.constraint(equalTo: titleLabel!.centerXAnchor, constant: -25/2).isActive = true
+        //errorLabel?.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        errorLabel?.topAnchor.constraint(equalTo: singUpRedirection!.bottomAnchor, constant: 10).isActive = true
+       
+        ///
+        
+        
+    }
+    
+    //MARK: Funciones
+    
+    func showError() {
+            errorLabel!.text = "Todos los campos deben estar llenos"
+        }
+        
+    func hideError() {
+            errorLabel!.text = ""
+        }
+    
+    @objc func emailTextFileEditingChanged(){
+        hideError()
+        singInViewModel.email = emailTextField!.text ?? ""
+    }
+    
+    @objc func passwordTextFileEditingChanged(){
+        hideError()
+        singInViewModel.password = passwordTextField!.text ?? ""
+    }
+    
+    @objc func signInButtonTapped() {
+        if singInViewModel.isValid {
+            let nextView = WinesViewController()
+            nextView.modalPresentationStyle = .fullScreen
+            present(nextView, animated: true, completion: nil)
+        } else {
+            showError()
+        }
     }
     
     @objc func goToNext(){
