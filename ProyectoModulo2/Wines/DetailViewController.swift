@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
     
     func initUI(){
         
-        wineContent = UIView(frame: CGRect(x: Constants.leftPadding, y: Constants.leftPadding, width: Constants.width - (Constants.leftPadding*2), height: (Constants.height) - Constants.leftPadding*5))
+        wineContent = UIView(frame: CGRect(x: Constants.padding, y: Constants.padding, width: Constants.width - (Constants.padding*2), height: (Constants.height) - Constants.padding*5))
         wineContent?.backgroundColor = .ligtColor2
         wineContent?.layer.cornerRadius = 10
         view.addSubview(wineContent!)
@@ -47,13 +47,13 @@ class DetailViewController: UIViewController {
         wineImage?.layer.cornerRadius = 10
         wineContent?.addSubview(wineImage!)
         
-        wineName = UILabel(frame: CGRect(x: 0, y: 200, width: Constants.width - Constants.leftPadding*2, height: 40))
+        wineName = UILabel(frame: CGRect(x: 0, y: 200, width: Constants.width - Constants.padding*2, height: 40))
         wineName?.text = wine?.name
         wineName?.textAlignment = .center
         wineName?.font = UIFont(name: "Georgia", size: 30)
         wineContent?.addSubview(wineName!)
         
-        wineDescription = UILabel(frame: CGRect(x: Constants.leftPadding, y: (wineName?.frame.maxY ?? 0) + 20, width: Constants.width - Constants.leftPadding*4, height: 250))
+        wineDescription = UILabel(frame: CGRect(x: Constants.padding, y: (wineName?.frame.maxY ?? 0) + 20, width: Constants.width - Constants.padding*4, height: 250))
         wineDescription?.text = wine?.description
         wineDescription?.numberOfLines = 0
         wineDescription?.textAlignment = .justified
@@ -62,19 +62,19 @@ class DetailViewController: UIViewController {
         
         print(wineDescription?.frame.maxY ?? 0)
         
-        wineCountry = UILabel(frame: CGRect(x: Constants.leftPadding, y: (wineDescription?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.leftPadding, height: 20))
+        wineCountry = UILabel(frame: CGRect(x: Constants.padding, y: (wineDescription?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.padding, height: 20))
         wineCountry?.text = wine?.country
         wineCountry?.textAlignment = .left
         wineCountry?.font = UIFont(name: "Georgia", size: 15)
         wineContent?.addSubview(wineCountry!)
         
-        wineGrape = UILabel(frame: CGRect(x: Constants.leftPadding, y: (wineCountry?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.leftPadding, height: 20))
+        wineGrape = UILabel(frame: CGRect(x: Constants.padding, y: (wineCountry?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.padding, height: 20))
         wineGrape?.text = wine?.grape
         wineGrape?.textAlignment = .left
         wineGrape?.font = UIFont(name: "Georgia", size: 15)
         wineContent?.addSubview(wineGrape!)
         
-        wineTemp = UILabel(frame: CGRect(x: Constants.leftPadding, y: (wineGrape?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.leftPadding, height: 20))
+        wineTemp = UILabel(frame: CGRect(x: Constants.padding, y: (wineGrape?.frame.maxY ?? 0) + 5, width: Constants.width - Constants.padding, height: 20))
         wineTemp?.text = "\(String(wine?.temp ?? 0)) °C"
         wineTemp?.textAlignment = .left
         wineTemp?.font = UIFont(name: "Georgia", size: 15)

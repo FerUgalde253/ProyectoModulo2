@@ -11,7 +11,7 @@ struct Constants{
     
     static var width = UIScreen.main.bounds.width
     static var height = UIScreen.main.bounds.height
-    static var leftPadding : CGFloat = 25
+    static var padding : CGFloat = 25
     
     
 }

@@ -22,7 +22,7 @@ class WinesViewController: UIViewController {
     }
     
     func initUI(){
-        tableView = UITableView(frame: CGRect(x: Constants.leftPadding, y: Constants.leftPadding*10, width: Constants.width - Constants.leftPadding*2, height: Constants.height-Constants.leftPadding*10))
+        tableView = UITableView(frame: CGRect(x: Constants.padding, y: Constants.padding*10, width: Constants.width - Constants.padding*2, height: Constants.height-Constants.padding*10))
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.ligtColor2
@@ -154,7 +154,7 @@ extension WinesViewController : UITableViewDelegate, UITableViewDataSource {
         image.image = UIImage(named: "wineBottle")
         view.addSubview(image)
         
-        let label = UILabel(frame: CGRect(x: 0, y: 7.5, width: Constants.width - Constants.leftPadding*2, height: 25))
+        let label = UILabel(frame: CGRect(x: 0, y: 7.5, width: Constants.width - Constants.padding*2, height: 25))
         label.textColor = UIColor.ligtColor2
         label.text = wineData.dataSource?.category?[section].name ?? ""
         label.textAlignment = .center
