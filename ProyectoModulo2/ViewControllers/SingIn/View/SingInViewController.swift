@@ -10,9 +10,10 @@ import UIKit
 class SingInViewController: UIViewController {
     
     private var singInViewModel = SingInViewModel()
+    private var kvoObservations: [NSKeyValueObservation] = []
 
     var titleLabel : UILabel = UILabel()
-    var emailTextField : UITextField = UITextField()
+    var usernameTextField : UITextField = UITextField()
     var passwordTextField : UITextField = UITextField()
     var buttonSignIn : UIButton = UIButton()
     var singInContainer : UIView = UIView()
@@ -23,8 +24,10 @@ class SingInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         screenElements()
+        singInViewModel.getUsers()
+        //setupObservations()
         buttonSignIn.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
-        emailTextField.addTarget(self, action: #selector(emailTextFileEditingChanged), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(usernameTextFileEditingChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(passwordTextFileEditingChanged), for: .editingChanged)
         view.backgroundColor = UIColor.ligtColor1
     }
@@ -44,13 +47,13 @@ class SingInViewController: UIViewController {
         view.addSubview(singInContainer)
         singInContainer.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////////////////
-        emailTextField.textAlignment = .left
-        emailTextField.placeholder = "  Email"
-        emailTextField.backgroundColor = UIColor.ligtColor2
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.borderColor = UIColor.black.cgColor
-        view.addSubview(emailTextField)
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        usernameTextField.textAlignment = .left
+        usernameTextField.placeholder = "  Email"
+        usernameTextField.backgroundColor = UIColor.ligtColor2
+        usernameTextField.layer.cornerRadius = 10
+        usernameTextField.layer.borderColor = UIColor.black.cgColor
+        view.addSubview(usernameTextField)
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////////////////
         passwordTextField.textAlignment = .left
         passwordTextField.placeholder = "  Password"
@@ -96,7 +99,7 @@ class SingInViewController: UIViewController {
         ///Constrains
 
         // X Center Constrains
-        [titleLabel,singInContainer,emailTextField,passwordTextField,buttonSignIn,singUpRedirection,errorLabel].forEach { view in NSLayoutConstraint.activate([view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)])
+        [titleLabel,singInContainer,usernameTextField,passwordTextField,buttonSignIn,singUpRedirection,errorLabel].forEach { view in NSLayoutConstraint.activate([view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)])
         }
         // Left Constrains
         [titleLabel,singInContainer,buttonSignIn,singUpRedirection,errorLabel].forEach { view in NSLayoutConstraint.activate([view.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.padding)])
@@ -110,9 +113,9 @@ class SingInViewController: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 60),
             singInContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.padding*1.5),
             singInContainer.heightAnchor.constraint(equalToConstant: 130),
-            emailTextField.topAnchor.constraint(equalTo: singInContainer.topAnchor, constant: 10),
-            emailTextField.heightAnchor.constraint(equalToConstant: Constants.padding*2),
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
+            usernameTextField.topAnchor.constraint(equalTo: singInContainer.topAnchor, constant: 10),
+            usernameTextField.heightAnchor.constraint(equalToConstant: Constants.padding*2),
+            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 10),
             passwordTextField.heightAnchor.constraint(equalToConstant: Constants.padding*2),
             buttonSignIn.topAnchor.constraint(equalTo: singInContainer.bottomAnchor, constant: Constants.padding*2.4),
             buttonSignIn.heightAnchor.constraint(equalToConstant: 50),
@@ -127,12 +130,28 @@ class SingInViewController: UIViewController {
         // Special Constrains
         NSLayoutConstraint.activate([
             backButton.widthAnchor.constraint(equalToConstant: Constants.padding),
-            emailTextField.widthAnchor.constraint(equalTo: singInContainer.widthAnchor, constant: -20),
+            usernameTextField.widthAnchor.constraint(equalTo: singInContainer.widthAnchor, constant: -20),
             passwordTextField.widthAnchor.constraint(equalTo: singInContainer.widthAnchor, constant: -20)
         ])
     }
     
     //MARK: Funciones
+    
+    private func setupObservations(){
+        let kvoUserAgeObservation = singInViewModel.observe(\.username, options: [.initial, .new]) { [weak self] (view, change) in
+            if let newUserAge = change.newValue{
+                /*switch (true) {
+                case newUserAge < 18:
+                    self?.errorLabel.text = "Lo sentimos eres menos de edad"
+                case newUserAge >= 18:
+                    self?.errorLabel.text = "Bienvenido al mundo del vino"
+                default:
+                    return
+                }*/
+            }
+        }
+        kvoObservations = [kvoUserAgeObservation]
+    }
     
     //Funcions
     func showError() {
@@ -143,9 +162,9 @@ class SingInViewController: UIViewController {
             errorLabel.text = ""
         }
     //Objc Funcions
-    @objc func emailTextFileEditingChanged(){
+    @objc func usernameTextFileEditingChanged(){
         hideError()
-        singInViewModel.email = emailTextField.text ?? ""
+        singInViewModel.username = usernameTextField.text ?? ""
     }
     
     @objc func passwordTextFileEditingChanged(){
@@ -153,15 +172,22 @@ class SingInViewController: UIViewController {
         singInViewModel.password = passwordTextField.text ?? ""
     }
     
+    
     @objc func signInButtonTapped() {
-        if singInViewModel.isValid {
+        guard let usernameText = usernameTextField.text, let passwordText = passwordTextField.text else {
+            return
+        }
+        let existe = singInViewModel.containsUser(withName: usernameText, password: passwordText)
+        
+        if existe {
             let nextView = WinesViewController()
             nextView.modalPresentationStyle = .fullScreen
             present(nextView, animated: true, completion: nil)
-        } else {
-            showError()
+        }else {
+            errorLabel.text = "Usuario no existe"
         }
     }
+    
     @objc func goToSingUp(){
         let nextVC = SingUpViewController()
         nextVC.modalPresentationStyle = .fullScreen

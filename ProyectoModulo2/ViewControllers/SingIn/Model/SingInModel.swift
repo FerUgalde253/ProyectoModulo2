@@ -1,18 +1,17 @@
 //
-//  Model.swift
+//  SingInModel.swift
 //  ProyectoModulo2
 //
-//  Created by Fernando Ugalde on 09/08/23.
+//  Created by Fernando Ugalde on 15/08/23.
 //
 
 import Foundation
 
-
-struct SinginModel {
-    var email: String
+struct SingInModel {
+    var username: String
     var password: String
 
     var isValid: Bool {
-        return !email.isEmpty && !password.isEmpty
+        return !username.isEmpty && !password.isEmpty
     }
 }
