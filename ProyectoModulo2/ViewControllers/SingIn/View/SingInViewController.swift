@@ -41,7 +41,6 @@ class SingInViewController: UIViewController {
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////////////////
-        singInContainer = UIView()
         singInContainer.backgroundColor = UIColor.myButtonlColor
         singInContainer.layer.cornerRadius = 10
         view.addSubview(singInContainer)
@@ -63,7 +62,6 @@ class SingInViewController: UIViewController {
         view.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////////////////
-        buttonSignIn = UIButton()
         buttonSignIn.backgroundColor = UIColor.myButtonlColor
         buttonSignIn.layer.cornerRadius = 20
         buttonSignIn.titleLabel?.font = UIFont(name: "Georgia Bold", size: 20)
@@ -72,7 +70,6 @@ class SingInViewController: UIViewController {
         view.addSubview(buttonSignIn)
         buttonSignIn.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////////////////
-        singUpRedirection = UIButton()
         singUpRedirection.backgroundColor = UIColor.clear
         singUpRedirection.titleLabel?.font = UIFont(name: "Georgia", size: 20)
         singUpRedirection.setTitle("I haven't an account", for: .normal)
@@ -81,7 +78,6 @@ class SingInViewController: UIViewController {
         view.addSubview(singUpRedirection)
         singUpRedirection.translatesAutoresizingMaskIntoConstraints = false
         /////////////////////////////////////////////////////////////////
-        backButton = UIButton()
         backButton.backgroundColor = UIColor.clear
         backButton.setImage(UIImage(systemName: "house.fill"), for: .normal)
         backButton.tintColor = UIColor.myBackGroundColor
@@ -89,7 +85,6 @@ class SingInViewController: UIViewController {
         view.addSubview(backButton)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         ////////////////////////////////
-        errorLabel = UILabel()
         errorLabel.textColor = UIColor.myBackGroundColor
         errorLabel.font = UIFont(name: "Georgia", size: 20)
         errorLabel.textAlignment = .center
@@ -138,7 +133,7 @@ class SingInViewController: UIViewController {
     //MARK: Funciones
     
     private func setupObservations(){
-        let kvoUserAgeObservation = singInViewModel.observe(\.username, options: [.initial, .new]) { [weak self] (view, change) in
+        let kvoUserAgeObservation = singInViewModel.observe(\.password, options: [.initial, .new]) { [weak self] (view, change) in
             if let newUserAge = change.newValue{
                 /*switch (true) {
                 case newUserAge < 18:

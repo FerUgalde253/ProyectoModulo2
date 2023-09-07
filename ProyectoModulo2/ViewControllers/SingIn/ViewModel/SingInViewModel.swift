@@ -20,13 +20,14 @@ class SingInViewModel: NSObject {
             case .success(let parsedData):
                 DispatchQueue.main.async {
                     self?.users = parsedData.result
-                    print(self?.users)
+                    print(self?.users ?? [])
                 }
             case .failure(let error):
                 print("Error getting user: \(error)")
             }
         }
     }
+    
     
     func containsUser(withName username: String, password: String) -> Bool {
         return users.contains { user in

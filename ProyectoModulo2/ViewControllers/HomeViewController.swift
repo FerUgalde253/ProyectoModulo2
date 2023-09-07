@@ -114,20 +114,37 @@ class HomeViewController: UIViewController {
         ///
     }
     
-
+    func ImageAnimation(){
+        print("AnimandoAndo")
+        UIView.animateKeyframes(withDuration: 1.5,delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.333, animations: {
+                self.startImage?.transform = (self.startImage?.transform.rotated(by: .pi / 3))!
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.333, relativeDuration: 0.6666, animations: {
+                self.startImage?.transform = (self.startImage?.transform.rotated(by: -.pi / 3))!
+            })
+        }, completion: { _ in
+            let goTo = SingUpViewController()
+            goTo.modalPresentationStyle = .fullScreen
+            self.present(goTo, animated: true, completion: nil)
+        })
+    }
     
     @objc func singInViewController() {
+        var timer = 5
         print("Sing In button presed")
+        ImageAnimation()
         let goTo = SingInViewController()
         goTo.modalPresentationStyle = .fullScreen
         present(goTo, animated: true, completion: nil)
-    
     }
     @objc func singUpViewController() {
         print("Sing Un button presed")
-        let goTo = SingUpViewController()
-        goTo.modalPresentationStyle = .fullScreen
-        present(goTo, animated: true, completion: nil)
+        ImageAnimation()
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 1.75) {
+            let goTo = SingUpViewController()
+            goTo.modalPresentationStyle = .fullScreen
+            self.present(goTo, animated: true, completion: nil)
+        }*/
     }
-
 }
