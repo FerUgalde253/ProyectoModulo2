@@ -131,7 +131,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc func singInViewController() {
-        var timer = 5
         print("Sing In button presed")
         ImageAnimation()
         let goTo = SingInViewController()

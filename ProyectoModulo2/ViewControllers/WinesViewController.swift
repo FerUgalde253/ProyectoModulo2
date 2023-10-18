@@ -21,6 +21,7 @@ class WinesViewController: UIViewController {
         
     }
     
+    
     func initUI(){
         tableView = UITableView(frame: CGRect(x: Constants.padding, y: Constants.padding*10, width: Constants.width - Constants.padding*2, height: Constants.height-Constants.padding*10))
         tableView?.delegate = self

@@ -131,22 +131,7 @@ class SingInViewController: UIViewController {
     }
     
     //MARK: Funciones
-    
-    private func setupObservations(){
-        let kvoUserAgeObservation = singInViewModel.observe(\.password, options: [.initial, .new]) { [weak self] (view, change) in
-            if let newUserAge = change.newValue{
-                /*switch (true) {
-                case newUserAge < 18:
-                    self?.errorLabel.text = "Lo sentimos eres menos de edad"
-                case newUserAge >= 18:
-                    self?.errorLabel.text = "Bienvenido al mundo del vino"
-                default:
-                    return
-                }*/
-            }
-        }
-        kvoObservations = [kvoUserAgeObservation]
-    }
+
     
     //Funcions
     func showError() {
